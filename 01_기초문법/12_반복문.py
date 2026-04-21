@@ -108,7 +108,7 @@ def 파일읽기():
     with open("오늘일기.txt","r",encoding="UTF-8") as file:
         content = file.read()
         print(content)
-파일읽기()
+#파일읽기()
 
 
 
