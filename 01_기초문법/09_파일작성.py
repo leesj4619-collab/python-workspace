@@ -8,19 +8,19 @@ open("파일명.txt","r") read - 읽기 모드
 open("파일명.txt","a") append - 기존 내용이 존재한다면 유지한 채 이어 쓰기
 '''
 
-파일 = open("my_diary.txt","w", encoding="UTF-8")
-
-while True:
-    글자작성 = input("입력하세요 (그만하려면 q 입력) : ")
-#만약 Q를 작성해도 작성 종료로 하고 싶다면
-# upper() = 대문자로 통일
-# lower() = 소문자로 통일
-# 위 둘 중 하나를 이용해서 대문자 Q를 작성해도 종료하게끔 처리
-    if 글자작성.lower() == "q":
-        print("저장 완료!")
-        break
-    파일.write(글자작성 + "\n")
-파일.close()
+# 파일 = open("my_diary.txt","w", encoding="UTF-8")
+#
+# while True:
+#     글자작성 = input("입력하세요 (그만하려면 q 입력) : ")
+# #만약 Q를 작성해도 작성 종료로 하고 싶다면
+# # upper() = 대문자로 통일
+# # lower() = 소문자로 통일
+# # 위 둘 중 하나를 이용해서 대문자 Q를 작성해도 종료하게끔 처리
+#     if 글자작성.lower() == "q":
+#         print("저장 완료!")
+#         break
+#     파일.write(글자작성 + "\n")
+# 파일.close()
 
 #### 자동으로 닫기 처리 하는 방법 평균적으로 사용하는 방법
 # with 안에 작성한 파일열기 파일쓰기 와 같은 블록을 자동으로 코드가 종료되면
@@ -37,4 +37,4 @@ with open("my_diary.txt","w", encoding="UTF-8") as 파일:
             print("저장 완료!")
             break
         파일.write(글자작성 + "\n")
-#파일.close()
+#파일.close() 
