@@ -40,4 +40,12 @@ def 로또번호여러줄():
     for i in range(1, 로또번호줄 + 1):
         숫자들 = random.sample(range(1,46) ,6)
         print(f"{i}번 :{숫자들}")
-로또번호여러줄()
+#로또번호여러줄()
+
+def 로또번호():
+    로또번호줄 = int(input("로또 구매 입력 : "))
+    for i in range(1, 로또번호줄+1):
+        숫자들 = random.sample(range(1,46),6)
+        숫자들.sort()
+        print(f"{i}줄 {숫자들}번호")
+로또번호()
