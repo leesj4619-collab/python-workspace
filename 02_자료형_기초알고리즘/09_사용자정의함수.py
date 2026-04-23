@@ -57,4 +57,10 @@ def 정보(**kwargs):
         print(f"{k} : {v}")
 정보(name='철수',age='25',city='부산')
 
+## 4. 기본값이 존재하는 매개변수와 기본값이 없는 매개변수가 있을 때
+# 기본값이 없는 age와 name 은 반드시 기본값이 있는 매개변수들보다 맨 앞 쪽으로 우선적으로 위치해야한다.
+# def 매개변수들(name, age, height=175.5, hobby="음악듣기"):
+def 매개변수들(name, age, height=175.5, hobby="음악듣기"):
+    print(f"{name}은 {age}세 이고, 키는{height} 이며, 취미는 {hobby}이다.")
+
 
