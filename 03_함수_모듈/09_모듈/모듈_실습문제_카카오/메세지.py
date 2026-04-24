@@ -1,6 +1,18 @@
 import datetime
+'''
+YYYY -  year
+MM  -   month
+d   -   day
 
+h   -   hour
+mm  -   minute
+SS  -   second
+
+M   -   월을 뜻한다.
+m   -   분을 뜻한다.
+'''
 def 현재시간():
+    # datetime 라이브러리 이름 안에 datetime 파일존재 파일 안에 now() 기능 존재
     지금 = datetime.datetime.now()
     return f"{지금.hour}:{지금.minute:02d}"
 
