@@ -1,6 +1,7 @@
 class 사람:
     def __init__(self,이름):
         self.이름 = 이름
+
 class 학생(사람):
     def __init__(self,이름,학교):
         super().__init__(이름) # 부모의 __init__ 실행
