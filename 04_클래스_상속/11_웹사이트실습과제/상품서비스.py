@@ -5,11 +5,11 @@ class 상품서비스:
         self.conn = DB연결()
 
     def 전체조회(self):
-        cursor = self.conn.cursor(dictionary=__)
-        cursor.execute("SELECT * FROM __")
-        return cursor.__()
+        cursor = self.conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM products")
+        return cursor.fetchall()
 
     def 상세조회(self, id):
         cursor = self.conn.cursor(dictionary=True)
         cursor.execute("SELECT * FROM products WHERE id = %s", (id,))
-        return cursor.__()
+        return cursor.fetchone()
