@@ -23,7 +23,7 @@ entry.pack(pady=5)
 
 def 버튼클릭():
     name = entry.get()
-    label.config(tetx=f"안녕, {name}")
+    label.config(text=f"안녕, {name}")
 
 btn = tk.Button(window,text="클릭", command=버튼클릭)
 btn.pack(pady=5)
