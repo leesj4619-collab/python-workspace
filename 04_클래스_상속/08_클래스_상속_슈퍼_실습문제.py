@@ -1,4 +1,4 @@
-class 구글:
+'''class 구글:
     def __init__(self,이름,이메일):
         self.이름 = 이름
         self.이메일 = 이메일
@@ -20,14 +20,16 @@ class 유튜브(구글):
     def 구독자확인(self):
         print(f'{self.채널명} 채널 구독자 확인중')
 
-public class Main {
-public static void main(String[] args) {
+class Main():
+    A회원 =
+
+
 유튜브 철수 = new 유튜브("철수", "철수@gmail.com", "철수TV");
 
 철수.로그인();
 철수.프로필출력();
 철수.영상업로드();
-철수.구독자확인();
+철수.구독자확인();'''
 
 
 '''
