@@ -80,6 +80,7 @@ def 뉴스20개수집():
 
     # TODO: url목록가져오기() 함수 호출해서 url목록 변수에 저장
     url목록 = url목록가져오기()
+    수집결과 = []
 
     for i, url in enumerate(url목록):
         print(f"\n[ {i+1}번째 기사 ]")
