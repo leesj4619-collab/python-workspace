@@ -1,6 +1,14 @@
 from playwright.sync_api import sync_playwright
 import time
-
+'''
+playwright 시작
+    → 브라우저 열기
+        → 검색어마다 페이지 이동
+            → 제목 + 본문 가져오기
+                → 출력
+    → 브라우저 닫기
+→ playwright 닫기                        
+'''
 
 def 나무위키기본():
     p = sync_playwright().start()   # playwright 실행 시작
@@ -22,3 +30,4 @@ def 나무위키기본():
         print() # 검색어 사이 구분용
 
         time.sleep(2) # 다음 검색 전 2초 대기 너무빠르면 봇인것을 인지하고 ip차단
+나무위키기본()
