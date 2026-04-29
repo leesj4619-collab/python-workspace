@@ -48,29 +48,25 @@ from playwright.sync_api import sync_playwright
 def playwright기본코드():
     # playwright시작
     p = sync_playwright().start()
-
     # 브라우저 열기
     browser = p.chromium.launch(
         headless=False,
-        args=['--disable-blink-features=AutomationControlled']
+        args=["--disable-blink-features=AutomationControlled"]
     )
     context = browser.new_context(
         user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
     )
-
     # 새 페이지
     #page = browser.new_page()
     page = context.new_page()
-    page.add_init_script("Object.defineProperty(navigator,'webdriver',{get: () => undefined})")
+    page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     # 페이지 이동
-    page.goto('https://google.com')
-
+    page.goto("https://google.com")
     # 요소 찾고 입력
-    page.fill('textarea[name="q"]','Playwright란')
+    page.fill('textarea[name="q"]', 'Playwright 란')
     page.keyboard.press("Enter")
-
     # 결과 기다리기
-    page.wait_for_load_state('networkidel')
+    page.wait_for_load_state("networkidle")
     print(page.title())
     # 종료
     browser.close()
