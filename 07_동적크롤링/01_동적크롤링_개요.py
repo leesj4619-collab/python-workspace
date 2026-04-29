@@ -71,4 +71,43 @@ def playwright기본코드():
     # 종료
     browser.close()
     p.stop()
-playwright기본코드()
+#playwright기본코드()
+
+# from playwright_stealth import stealth_sync 1버전 대 사용 법
+#from playwright_stealth import Stealth       #2버전 대 사용 법
+
+def playwrightStealtn코드_version2_아직은개발중인단계_코드():
+    # playwright시작
+    p = sync_playwright().start()
+    # 브라우저 열기
+    browser = p.chromium.launch(headless=False)
+    #stealth = Stealth()
+    # 새 페이지
+    page = browser.new_page()
+    #Stealth().use_sync(page).__enter__()
+    # 페이지 이동
+    page.goto("https://google.com")
+    # 요소 찾고 입력
+    page.fill('textarea[name="q"]', 'Playwright 란')
+    page.keyboard.press("Enter")
+    # 결과 기다리기
+    page.wait_for_load_state("networkidle")
+    print(page.title())
+    # 종료
+    browser.close()
+    p.stop()
+
+from playwright.sync_api import sync_playwright
+
+def 구글대신네이버():
+    p = sync_playwright().start()
+    browser = p.chromium.launch(headless=False)
+    page = browser.new_page()
+
+    page.goto("https://search.naver.com/search.naver?query=강아지")
+    print(page.title())
+
+    browser.close()
+    p.stop()
+구글대신네이버()
+
