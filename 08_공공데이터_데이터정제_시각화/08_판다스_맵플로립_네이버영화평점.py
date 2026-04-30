@@ -85,16 +85,16 @@ def 시각화세팅():
     plt.show()
 
     # TODO: 장르별 수 집계
-    장르별_수 = df['장르'].()
+    장르별_수 = df['장르'].value_counts()
 
     # TODO: 파이 차트
     # 퍼센트 소수점 1자리, 제목 = "장르별 영화 비율"
-    plt.????(
-        장르별_수.????,
-    labels=장르별_수.????,
-    autopct=????
+    plt.pie(
+        장르별_수.values,
+    labels=장르별_수.index,
+    autopct='%1.1f%%'
     )
-    plt.????(????)
-    plt.????()
+    plt.title('장르별 영화 비율')
+    plt.show()
 
 시각화세팅()

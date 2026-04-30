@@ -69,8 +69,8 @@ plt.show()
 # 퍼센트 소수점 1자리 표시
 # 제목 = "실내/실외 관광지 비율"
 plt.pie(
-    실내외_수['실내구분'],
-labels=실내외_수['실외'],
+    실내외_수.values,
+labels=실내외_수.index,
 autopct='%1.1f%%'
 )
 plt.title('실내구분별 수 집계')
