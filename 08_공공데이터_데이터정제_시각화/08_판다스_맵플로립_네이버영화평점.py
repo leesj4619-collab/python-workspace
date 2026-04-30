@@ -96,5 +96,22 @@ def 시각화세팅():
     )
     plt.title('장르별 영화 비율')
     plt.show()
+   ''' # TODO: 히스토그램
+    # 관객수 컬럼, 구간 5개
+    # 제목 = "영화 관객수 분포"
+    # x축 = "관객수 (만명)", y축 = "영화 수"
+    plt.????(df[????], bins=????)
+    plt.????(????)
+    plt.????(????)
+    plt.????(????)
+    plt.show()
+
+    plt.bar(df["영화명"], df["실관람객평점"])
+    plt.title("영화별 실관람객 평점")
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    # TODO: "영화평점_차트.png" 로 저장
+    plt.????(????)
+    plt.show()'''
 
 시각화세팅()
