@@ -1,0 +1,109 @@
+# 컬럼 사업명	서비스	기준년월	지급건수	지급금액
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+
+# step 0 - pandas 한글 폰트 설정
+matplotlib.rcParams['font.family'] = 'Malgun Gothic'
+# matplotlib.rcParams['font.family'] = 'AppleGothic' # 맥북에는 맑은 고딕 대신 애플고딕 존재
+matplotlib.rcParams['axes.unicode_minus'] = False
+# step 1 - pandas 파일 불러오기
+df = pd.read_csv('한국사회보장정보원_복지사업_월별_급여지급_현황_20241231.csv',encoding='cp949')
+# step 2 - pandas 블루온 파일 기본정보 파악
+def step2():
+    print(df.head())
+    print(df.tail())
+    print(df.shape)
+    print(df.columns)
+    print(df['사업명'].unique())
+    print(df.info())
+    print(df.describe())
+    print(df.isnull().sum)
+    print(df['사업명'].value_counts()) # 사업명에 존재하는 새로 데이터 하나하나 확인해서 명칭 작성 개발자가 직접해야함
+#step2()
+# value_counts()가 없었다면 len(df['사업명']=='기초연금')을 일일이 하나씩 작성해야한다
+# step 3 - Numpy 기본 통계 계산
+def step3():
+    # 지급 금액만 배열로 추출
+    금액 = df['지급금액'].values # NumPy 배열로 변환되어 데이터 리스트 형태로 보관
+    건수 = df['지급건수'].values
+
+    print("지급금액 합계 : ", np.sum(금액))
+    print("평균 : ", np.mean(금액))
+    print("지급금액 최대 : ", np.max(금액))
+    print("지급금액 최소 : ", np.min(금액))
+    print("표준편차 : ", np.std(금액))
+    print("사업명별 평균 지급금액 : ", df.groupby('사업명')['지급금액'].mean())
+    '''
+    기초생활     1.177620e+05
+    기초연금     1.833347e+06
+    장애인복지    1.044740e+05
+    '''
+#step3()
+# step 4 - pandas 데이터 필터링
+def step4():
+    기초연금 = df[df['사업명'] == '기초연금']
+    print(기초연금.head())
+#   기준년월 컬럼에서 문자열로 되어있고 2024로 시작하는
+# df_2024 = df[df['기준년월'].str.startswith('2024')]
+    df_2024 = df[df['기준년월'].str.startswith('2024')]
+    print(df_2024)
+
+    #지급건수 100만 이상인 행만
+    많은건수 = df[df['지급건수'] > 1000000]
+    print(많은건수['서비스'].value_counts())
+#step4()
+# step 5 - Matplotlib 선그래프 그리기 ((꺾은)선 plot)
+def step5():
+    # 기초연금 월별 지급금액 추이
+    기초연금 = df[df['사업명'] == '기초연금']
+    plt.figure(figsize=(12,5)) # 그래프가 나오는 가로 세로 크기 설정
+    # figsize=(12,5) 가로가 길고, 세로가 짧은 그래프
+    # figsize=(6,6) 정사각형 그래프
+    # figsize=(5,10) 세로가 긴 그래프
+    plt.plot(기초연금['기준년월'],기초연금['지급금액'],marker='o')
+    plt.title("기초연금 월별 지급금액 추이")
+    plt.xlabel('기준년월')
+    plt.ylabel('지급금액(백만원)')
+    plt.xticks(rotation=45)
+    plt.tight_layout
+    plt.show()
+#step5()
+# step 6 - Matplotlib 막대그래프 그리기 (bar)
+def step6():
+    # 사업명별 평균 지급금액 비교
+    사업별평균 = df.groupby('사업명')['지급금액'].mean()
+
+    plt.figure(figsize=(8,5))
+    plt.bar(사업별평균.index, 사업별평균.values, color=['skyblue','salmon','lightgreen'])
+    plt.title('사업명별 평균 지급금액 비교')
+    plt.xlabel('사업명')
+    plt.ylabel('평균 지급금액(백만원)')
+    plt.tight_layout
+    plt.show()
+#step6()
+
+# step 7 - Matplotlib 그래프 그리기 ((꺾은)선 plot) - 사업명 3개를 한 화면에서 비교
+def step7():
+    사업목록 = df['사업명'].unique() # 중복 제거하고 unique한 값만 뽑기
+    fig, axes = plt.subplots(1,3,figsize=(15,5)) # 그래프를 여러칸으로 나누기
+    # plt.subplots(행, 열, figsize=크기)
+    #
+    #
+    #                           1행 3열짜리 크래프 칸 3개 청 3개의 그래프 크기 사이즈
+    # fig, axes = plt.subplots( 1,   3   ,   figsize=(15,5)                     ) # 그래프를 여러칸으로 나누기
+    # fig = 전체 화면 틀 도화지
+    # axes = 각각의 그래프 칸 (리스트)
+    # enumerate = 번호 와 사업명을 순서대로 출력
+    for i,사업 in enumerate(사업목록):
+        data = df[df['사업명']==사업]
+        월별 = data.groupby('기준년월')['지급금액'].sum()
+
+        axes[i].plot(월별.index, 월별.values, marker='o')
+        axes[i].set_title(사업)
+        axes[i].set_xlabel('월')
+        axes[i].set_ylabel('지급금액')
+        axes[i].tick_params(axis='x', rotation=90)
+
+
