@@ -196,12 +196,13 @@ def 피벗테이블():
     # index = 왼쪽에 세울 것 columns = 위에 펼칠 것 values = 안에 채울 데이터
 
 def 피벗테이블예시():
-    df = pd.DataFrame(dict(
-        name=['홍길동','철수','짱구','철수'],
-        subject=['수학','영어','수학','영어'],
-        score=[90,85,82,75]
+    df = pd.DataFrame(
+        dict(
+            name=['Alice', 'Alice', 'Bob', 'Bob'],
+            subject=['math', 'english', 'math', 'english'],
+            score=[90, 85, 80, 75]
+        )
     )
-)
     print("==================피벗 전 데이터 확인=================")
 
     print(df)
@@ -217,6 +218,7 @@ def 피벗테이블예시():
     print(피벗작업)
 피벗테이블예시()
 '''
+한글 버전
 ==================피벗 전 데이터 확인=================
   name subject  score
 0  홍길동      수학     90
@@ -234,4 +236,17 @@ name
 짱구       82.0   NaN
 철수        NaN  80.0
 홍길동      90.0   NaN
+
+영어 버전
+==================피벗 전 데이터 확인=================
+    name  subject  score
+0  Alice     math     90
+1  Alice  english     85
+2    Bob     math     80
+3    Bob  english     75
+==================피벗 후 데이터 확인=================
+subject  english  math
+name                  
+Alice       85.0  90.0
+Bob         75.0  80.0
 '''
