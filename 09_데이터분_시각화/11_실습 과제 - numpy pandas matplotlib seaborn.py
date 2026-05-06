@@ -65,7 +65,7 @@ def 문제2_scatterplot_tips():
     # TODO: sns.scatterplot() 작성
     sns.scatterplot('tips')
     # TODO: 제목 설정
-
+    plt.title()
     # TODO: x축 레이블 → "계산서 금액"
 
     # TODO: y축 레이블 → "팁"
