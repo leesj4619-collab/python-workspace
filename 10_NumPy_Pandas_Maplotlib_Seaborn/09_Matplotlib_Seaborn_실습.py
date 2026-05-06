@@ -1,3 +1,13 @@
+'''
+loc - pandas DataFrame / Series에서 라벨(이름) 기반으로 데이터를 선택하는 인덱서
+dt.loc[행] 행라벨로 선택
+dt.loc[행, 열] 행 + 열 라벨로 선택
+
+axes = 여러 그래프를 만들 때 subplot에서 접근하는 배열
+axes[0] 왼쪽 그래프
+axes[1] 오른쪽 그래프
+
+'''
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -94,7 +104,7 @@ def matplotlib문제2():
     # 승하차별 시간대 평균을 구하세요.
     # 힌트 : groupby → mean
     # =============================================
-    강남 = df[df['역명'] == '강남역']
+    강남 = df[df['역명'] == '강남']
     강남평균 = 강남.groupby('승하차구분')[시간대].mean()
 
 
@@ -143,10 +153,10 @@ def matplotlib문제2():
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
     axes[0].bar(호선별.index, 호선별.values)
-    axes[0].set_title('호선별')
+    axes[0].set_title('호선별 막대 그래프')
 
     axes[1].barh(top10.index, top10.values)
-    axes[1].set_title('TOP10')
+    axes[1].set_title('TOP10 가로 막대 그래프')
 
     plt.tight_layout()
     plt.show()
