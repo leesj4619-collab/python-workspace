@@ -36,8 +36,15 @@ import folium
 # import openpyxl 이 라이브러리를 직접적으로 사용하지 않음
 import pandas as pd # csv 파일로 불러온 위도 경도 표기를 위하여 csv 파일 읽기
 from fontTools.subset import subset
-
-
+from folium.plugins import MarkerCluster # folium_excel_클러스터링 위해 추가한 라이브러리 모듈
+# folium 큰 상자 안에
+## plugin 에서
+### MarkerCluster만 가져와서 사용하겠다.
+##### 만약 위와 같이 작성하지 않는다면 folium.plugins.MarkerCluster() 작성해서 기능을 사용하면 된다.
+###### from folium.plugins import MarkerCluster 이렇게 쓸 이유가 없다!
+####### 하지만 from~import MarkerCluster를 작성하지 않으면 너무 길게 작성하게 되기 때문
+######## from~import MarkerCluster를 작성해서 MarkerCluster()으로 줄여서 사용하겠다.
+######### from folium.plugins import MarkerCluster as mc와 같이 사용할 수 있다!
 
 def folium기본():
     ## 1. 지도 생성
@@ -132,4 +139,28 @@ def folium_excel_위도경도():
     # 기획자와 회사가 결정한 사항에 따라서 처리
     # 위와 같은 사항을 데이터 전처리 -> 데이터로 결과를 만들기 전 전부다 처리
 
-folium_excel_위도경도()
+def folium_excel_클러스터링():
+    df = pd.read_excel('공공자전거_대여소_정보(25.12월_기준).xlsx',
+                       header=None,skiprows=4)
+    print(df.columns) # 컬럼명 확인
+    print(df.head())  # 상위 5개
+
+    df.columns = ["대여소번호",'대여소명','자치구','상세주소',
+                  '위도','경도','설치시기','LCD거치대','QR거치대',
+                  '운영방식'
+                  ]
+    df = df.dropna(subset=['위도','경도'])
+
+    # 지도 생성
+    m = folium.Map(location=[37.5665, 126.9780], zoom_start=15)
+    cluster = MarkerCluster().add_to(m) # 클러스터 생성
+    # 마커 찍기
+    for _, row in df.iterrows():
+        folium.Marker(
+            location=[row['위도'],row['경도']]
+        ).add_to(cluster) # m이 아닌 클러스터에 추가
+        # 위도 경도를 마커가 너무 많으면 동그라미 표기해주는 곳에 세팅할 거고
+        # 동그라미 표기법은 folium에서 제공하는 지도 형태를 따를 것.
+    m.save('따릉이지도.html')
+
+folium_excel_클러스터링()
