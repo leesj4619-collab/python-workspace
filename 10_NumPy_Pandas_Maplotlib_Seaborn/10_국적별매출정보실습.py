@@ -3,7 +3,7 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 
-plt.rcParams['font.family'] = 'D2Coding'
+plt.rcParams['font.family'] = 'Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] = False
 
 sns.set_theme(style='whitegrid')
@@ -89,6 +89,13 @@ plt.show()
 # =============================================
 월별 = df.groupby('판매년월')['매출'].sum()
 print('매출 1위 월 :', 월별.idxmax())
+'''
+메서드
+.idxmax()
+index max의 줄임말
+최댓값을 가진 인덱스(라벨) 반환
+최고의 데이터의 라벨
+'''
 
 
 # =============================================
