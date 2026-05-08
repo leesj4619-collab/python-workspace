@@ -51,7 +51,7 @@ def insert_문제3():
     print('게시물1 저장 id : ', 한건결과.inserted_id)
     # 게시물 2 3 등록
     # 데이터 다수 = [] 시작 데이터 한 건 = { }
-    여러건결과 = col_products.insert_many([
+    여러건결과 = col_posts.insert_many([
     {'author':"이몽고" ,
      'content':"맛집 발견" ,
      'images':["img1.jpg","img2.jpg","img3.jpg"] ,
@@ -68,6 +68,81 @@ def insert_문제3():
     'created_at':datetime.now()}
     ])
     print('게시물2 게시물3 등록 결과 ids : ',여러건결과.inserted_ids)
+
+def read_문제1_도서관_books_컬렉션_조회():
+    doc = col_books.find_one({'author':'김코팅'})
+    print('김코딩 한 건 조회 :', doc)
+
+    for doc in col_books.find().sort('pub_year',-1):
+        print(f'최신순 정렬 : {doc}')
+
+    for doc in col_books.find().sort('price',1).limit(2):
+        print(f'최신순 정렬 : {doc}')
+
+    for doc in col_books.find({}, {'_id':0,'title':1,'price':1}):
+        print(f'최신순 정렬 : {doc}')
+
+    count = col_books.count_documents({})
+    print(f'전체 책 권수 세기 : {count}')
+
+    for doc in col_books.find_one({'pub_year',-1}):
+        print(f'최신순 정렬 : {doc}')
+
+
+def read_문제2_쇼핑몰_product_조회():
+    for doc in col_products.find():
+        print(f'전체조회 : {doc}')
+
+    for doc in col_products.find({'price':{'$gte':50000}}):
+        print(f'price 가 50000 이상인 상품만 조회 : {doc}')
+
+    for doc in col_products.find().sort('price', -1):
+        print(f'price 기준 내림차순 정렬 조회 : {doc}')
+
+    for doc in col_products.find_one({ }, sort=[("price", -1)]):
+        print(f'가장 비싼 상품 1개만 조회 : {doc}')
+
+    for doc in col_products.find({},{'_id':0,'product_name':1,'price':1}):
+        print(f'product_name, price 필드만 보기 : {doc}')
+
+    count = col_products.count_documents({'stock':{'$lte':50}})
+    print(f'stock 이 50 이하인 상품 개수 세기 : {count}')
+
+    for doc in col_products.find().skip(1).limit(2):
+        print(f'2번째 상품부터 2개만 조회 {doc}')
+
+    for doc in col_products.find({"discount_rate": {"$exists": True}}):
+        print("할인 상품: ", doc)
+
+
+def read_문제3_SNS_posts_조회():
+    for doc in col_posts.find():
+        print(f'전체 조회 : {doc}')
+
+    doc = col_posts.find_one({'author':'김개발'})
+    print('김개발 한 건 조회 : ',doc)
+
+    for doc in col_posts.find({'likes':{'$gle':1}}):
+        print('likes 가 1 이상인 게시물만 조회',doc)
+
+    for doc in col_posts.find().sort('likes', 1):
+        print('likes 기준 내림차순 정렬 조회',doc)
+
+    for doc in col_posts.find({},{'_id':0,'author':1,'likes':1,'content':1}):
+        print('author, content, likes 필드만 보기',doc)
+
+    for doc in col_posts.find({'hashtags': {'$exists':True}}):
+        print('hashtags 필드가 존재하는 게시물만 조회 ',doc)
+
+    for doc in col_posts.find({"comments.writer": "최데이"}):
+        print("최데이 댓글을 단 게시물만 조회", doc)
+
+    # 8. 전체 게시물 수 세기
+    count = col_posts.count_documents({})
+    print("전체 게시무 수 : ", count)
+
+
+#read_문제2_쇼핑몰_product_조회()
 #insert_문제1()
 #insert_문제2()
-insert_문제3()
+#insert_문제3()
