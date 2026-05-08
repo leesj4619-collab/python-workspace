@@ -36,5 +36,4 @@ def 실습2():
     plt.savefig('wordcloud.png', dpi=150)
     # TODO: 화면에 출력
     plt.show()
-실습1()
-실습2()
+
