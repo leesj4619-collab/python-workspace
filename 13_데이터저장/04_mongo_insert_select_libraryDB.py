@@ -111,7 +111,7 @@ def 회원조회():
     for doc in col_members.find().sort('age', 1):
         print(f'age 기준 오름차순 정렬 조회 : {doc}')
     # 5. age 가 20 이상 40 이하인 회원만 조회
-    for doc in col_members.find().sort({'age':{'$gte':20} and {'$lte':40}):
+    for doc in col_members.find().sort({'age':{'$gte':20,'$lte':40}):
         print(f'age 가 20 이상 40 이하인 회원만 조회 : {doc}')
     # 6. name, age, grade 필드만 보기 (_id 숨기기)
     for doc in col_members.find({},{'_id':0,'name':1,'age':1,'grade':1}):
