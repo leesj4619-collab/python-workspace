@@ -1,16 +1,10 @@
 import random
 import mysql.connector
-from faker import Faker # 가짜 데이터를 만들어주는 라이브러리
-# 실제로 DB에 테스트 데이터를 넣을 때 사용
-# 50만개를 손으로 입력할 수 없기 때문에 Faker가 랜덤으로 만들어줌
+from faker import Faker
+from tqdm import tqdm
+import config
 
-from tqdm import tqdm # 진행바 만들어주는 라이브러리
-# 데이터베이스에서 데이터를 어디까지 insert 하고 있는지 보기위한 표기용
-
-import config # 우리가 만들어준 config.py 파일
-
-
-fake = Faker('ko_KR')
+fake = Faker("ko_KR")
 
 BRANDS     = ["삼성", "LG", "애플", "나이키", "아디다스", "다이슨", "유니클로", "소니"]
 CATEGORIES = ["스마트폰", "노트북", "운동화", "청바지", "청소기", "이어폰", "태블릿", "자켓"]
@@ -43,7 +37,7 @@ def insert_data():
     cursor = conn.cursor()
     sql    = """
              INSERT INTO products (name, brand, category, description, price, stock, rating)
-             VALUES (%s, %s, %s, %s, %s, %s, %s) \
+             VALUES (%s, %s, %s, %s, %s, %s, %s)
              """
     done = 0
     with tqdm(total=config.TOTAL, unit="건") as bar:
@@ -59,16 +53,5 @@ def insert_data():
     conn.close()
     print(f"  완료: {done:,}건")
 
-
-'''
-많이 하는 실수 __main__에서 main으로 작성하는것
-__ 파이썬에서 특수하게 명령을 부여한 단어임을 표기
-
-if __name__=='__main__': # 이 파일에 개발자가 와서 실행하겠다! 라는 버튼을 클릭해야지 실행
-    insert_data()
-
-insert_data() # 이 파일이 다른 파일에 import만 되어도 insert_data() 를 바로 실행!
-'''
-
-if __name__=='__main__': # import를 하고 나서 이기능을 사용하겠다 다른 py에서 호출해야지 기능 실행하도록 설정
+if __name__ == "__main__":
     insert_data()

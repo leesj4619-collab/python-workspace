@@ -1,4 +1,5 @@
 import os
+
 MYSQL = {
     "host":     "localhost",
     "port":     3307,
