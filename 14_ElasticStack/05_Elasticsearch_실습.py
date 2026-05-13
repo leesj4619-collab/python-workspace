@@ -1,4 +1,6 @@
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, NotFoundError
+
+
 def 실습3교시():
     es = Elasticsearch("http://localhost:9200")
 
@@ -73,8 +75,8 @@ query1= {'query':{
 }
 result1 = es.search(index='movies',body=query1)  # TODO: 여기를 채우세요
 for hit in result1['hits']['hits']:
-    print(' -',hit['_source'])
-print(result1)
+    src = hit['_source']
+    print(f'-{src['title']} ({src['year']})')
 # result1 = es.search(???)
 # for hit in result1["hits"]["hits"]:
 #     print(???)
@@ -86,12 +88,14 @@ print(result1)
 # - 어벤져스 | 액션 | 8.4
 
 query2 = {'query':{
-            'match':{
-                'genre':'액션'
+            'term':{
+                'genre.keyword':'액션'
             }
 }}  # TODO: 여기를 채우세요
 result2 = es.search(index='movies',body=query2)
-print(result2)
+for hit in result2['hits']['hits']:
+    src = hit['_source']
+    print(f"- {src['title']} | {src['genre']} | {src['rating']}")
 
 # ──────────────────────────────────────────────────────
 # TODO 3. id=4 문서의 rating을 9.0으로 수정하고
@@ -108,8 +112,16 @@ print('\n 수정 후 : ',update['_source'])
 #         삭제 후 id=5 조회 시 "삭제된 문서입니다" 출력하세요
 # 힌트: es.delete() 후 try/except
 es.delete(index='movies',id=5)
-
-print(['_source'])
+try:
+    es.get(index='movies', id=5)
+except NotFoundError:
+    print('삭제된 문서입니다.')
+# 확인되지 않은 참조 'NotFoundError'
+# elasticsearch 에서 문서를 찾을 수 없을 때 표기하기 위한 자체 에러 표기법
+# NotFoundError 라는 에러가 발생했을 때 대처를 하기 위해서는
+# elasticsearch 에서 제공하는 NotFoundError 표기
+# from elasticsearch import Elasticsearch, NotFoundError
+# ──────────────────────────────────────────────────────
 # TODO: 여기를 채우세요
 
 # ──────────────────────────────────────────────────────
