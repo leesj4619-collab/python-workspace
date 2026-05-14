@@ -28,6 +28,10 @@ search()    - 역색인 테이블을 검색하는 거라 색인이 완료되어�
             - 바로 search를 이용해서 데이터 추가된 것을 조회하고 싶다면
               search() 전에 refresh() 새로고침 작업을 해주어야 한다.
 '''
+# 소비자가 작성한 검색 기준으로 데이터 제공
+# 주로 소비자는 검색 = search()을 할 것!
+# 코드에서 자주 사용하게 될 것은 search()
+# search 내부에는 term match match_all 과 같은 검색관련 기능 내장
 
 from elasticsearch import Elasticsearch
 
@@ -84,10 +88,15 @@ def 데이터전체조회():
     print(result)
     print('========================== 데이터 전체 조회 완료 ============================')
     '''
-    {'took': 1, 'timed_out': False, '_shards': {'total': 1, 'successful': 1, 'skipped': 0, 'failed': 0}, 
-    'hits': 
-    {'total': {'value': 6, 'relation': 'eq'}, 'max_score': 1.0, 
-    'hits': 
+    {'took': 1, # 검색 걸린 시간 ms
+    'timed_out': False, # 타임 아웃 여부
+     '_shards': {   # 샤드 처리 결과 ()
+     'total': 1, 'successful': 1, 'skipped': 0, 'failed': 0
+     }, 
+    'hits': # 실제 검색 결과
+    {'total': {'value': 6, # 총 문서 수
+     'relation': 'eq'}, 'max_score': 1.0, 
+    'hits': # 실제 데이터 배열
     [{'_index': 'pokemon', '_id': '1', '_score': 1.0, '_source': {'name': '이상해씨', 'type': '풀', 'hp': 45, 'desc': '등에 씨앗이 있다'}}, 
     {'_index': 'pokemon', '_id': '4', '_score': 1.0, '_source': {'name': '파이리', 'type': '불꽃', 'hp': 39, 'desc': '꼬리 끝 불꽃이 생명력을 나타낸다'}}, 
     {'_index': 'pokemon', '_id': '7', '_score': 1.0, '_source': {'name': '꼬부기', 'type': '물', 'hp': 44, 'desc': '등껍질로 적의 공격을 막는다'}}, 
@@ -96,5 +105,26 @@ def 데이터전체조회():
     {'_index': 'pokemon', '_id': '9', '_score': 1.0, '_source': {'name': '거북왕', 'type': '물', 'hp': 79, 'desc': '대포로 물대포를 쏜다'}}]}}
 
     '''
-데이터전체조회()
+#데이터전체조회()
+def 하나씩_꺼내서_전체데이터_확인():
+    query = { 'query':{
+        'match_all':{}
+    }
+    }
+    전체조회데이터 = es.search(index='pokemon', body=query)
+    for 데이터한개 in 전체조회데이터['hits']['hits']:
+        print(데이터한개['_source'])
+        #print(전체조회데이터['hits']['hits']['_source']) 와 같다.
+하나씩_꺼내서_전체데이터_확인()
+
+# 데이터 조회 정리
+def 데이터조회정리():
+    es.get(index='pokemon', id=4)
+    # get table에서 id하나만 작성해서 개발자가 데이터 구조확인이나 id로 특수 작업을 진행할 때 사용
+
+    es.search(index='pokemon', body={ 'query':{'match_all':{}}})
+    # search( table에서 소비자가 원하는 데이터를 조회할 때 사용)
+    # 조회할 때 카테고리 / 브랜드처럼 담어가 명확한가?
+    # 제목이나 설명에서 단어를 찾아야 하는가?
+    # 데이터를 하나 찾아서 수정해야하는가? 와 같은 작업할 때
 # 4-2 bulk를 이용하는 전체 조회 (응용)
