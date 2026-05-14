@@ -27,6 +27,9 @@ NoSQL은 종류별로 나뉨
 - 그래프형(Graph) - 관계 / 연결 데이터에 특화
     Neo4j(친구추천)
 
+- 검색 엔진
+ Elasticsearch (JSON 기반, 문서 기반 동적 매핑 지원)
+
 요약
 MongoDB : 일반백엔드 스타트업
 Redis   : 세션, 캐싱, 실시간
