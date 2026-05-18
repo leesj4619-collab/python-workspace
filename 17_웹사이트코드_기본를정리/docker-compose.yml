@@ -1,0 +1,92 @@
+# docker-compose 를 ai를 이용하여 생성할 때
+# 현재는 우선 flask는 제거하고 생성
+# docker-compose 내에 flask를 작성하면 인텔리제이로 flask를 실행하는 것이 아니라
+# docker에서 flask를 실행하게 된다.
+# 프로젝트 전반적인 구조를 docker-compose에 기입할 수 있는 형태
+# RDB + ElasticSearch (option = + Kibana + FileBeat + Logstash)
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_orderdb
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: orderdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql_init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: elasticsearch_order
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: kibana_order
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+  flask:
+    build: .
+    container_name: flask_order
+    environment:
+      - MYSQL_USER=appuser
+      - MYSQL_PASSWORD=apppass
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DB=orderdb
+      - ES_HOST=elasticsearch
+      - ES_PORT=9200
+      - FLASK_DEBUG=true
+      - PORT=5000
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./logs:/app/logs          # Filebeat와 공유할 로그 폴더
+    depends_on:
+      mysql:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.11.0
+    container_name: filebeat_order
+    user: root                    # 로그 파일 읽기 권한
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro  # 설정 파일 (읽기 전용)
+      - ./logs:/app/logs:ro       # Flask 로그 폴더 (읽기 전용)
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    command: filebeat -e -strict.perms=false   # 개발 환경 권한 체크 완화
+
+volumes:
+  mysql_data:
+  es_data:
