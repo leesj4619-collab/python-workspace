@@ -9,7 +9,7 @@ X= digits.data
 y= digits.target
 
 model_split_size = 0.2
-model_random_state = 42
+model_random_state = 78
 neighbors = 3
 
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=model_split_size,random_state=model_random_state)
