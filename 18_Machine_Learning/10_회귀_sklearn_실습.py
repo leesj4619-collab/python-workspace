@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error, r2_score, accuracy_score
 import numpy as np
 
 # 1. 데이터 불러오기
-data = fetch_california_housing
+data = fetch_california_housing()
 X,y = data.data,data.target
 
 #print(dir(data))

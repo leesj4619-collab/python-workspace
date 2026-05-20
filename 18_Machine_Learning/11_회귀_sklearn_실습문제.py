@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
 
 # TODO 1. 데이터 불러오기
-data = load_diabetes
+data = load_diabetes()
 X, y = data.data, data.target
 
 # TODO 2. 데이터 크기 확인
