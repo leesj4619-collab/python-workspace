@@ -92,3 +92,4 @@ def 운동모델():
     result = loaded_model.predict([[90]])
     print(f"90분 운동 시 예상 칼로리 소모: {result[0]:.0f} kcal")
 운동모델()
+
