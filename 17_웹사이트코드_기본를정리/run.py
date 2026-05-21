@@ -14,7 +14,7 @@
    ├→ Kibana : 5601 컨테이너 시작
    │    └─ Es healthcheck 통과 후에 시작(depends_on) 엘라스틱서치로 기록된 데이터 시각화 관리자페이지 조회
    │
-   ├→ Filebeat : 컨테이너 시작
+   └→ Filebeat : 컨테이너 시작
         └─ Es healthcheck 통과 후에 시작(depends_on) 엘라스틱서치로 기록된 데이터 연결 확인 후 조회
         └─ filebeat.yml 읽고 logs/app.log 감시 시작
 
@@ -34,7 +34,7 @@
    │    │       └─ models.py 읽어서 MySQL 테이블 생성
    │    │            ├─ User → mysql에 users 테이블생성
    │    │            ├─ Product → mysql에 Products 테이블생성
-   │    │            ├─ Order → mysql에 Orders 테이블생성
+   │    │            └─ Order → mysql에 Orders 테이블생성
    ├── es_service.ensure_index()
    │        └─ es_client.py → ES에 order 인데스 + 매핑 생성
    └─ app.run(host,port, debug)
