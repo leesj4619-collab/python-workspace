@@ -9,10 +9,11 @@ from sklearn.metrics import  accuracy_score
 def 속성_메서드_조회():
     '''
     공톡적으로 모두 있는 것
-    DESCR           =
-    data            =
-    feature_names   =
-    frame           =
+    'DESCR'         = 데이터 설명서 print(data.DESCR) 이 데이터가 뭔지 영어로 설명 나옴
+    'data'          = 입력값(X에 넣는 학습용 데이터)
+    'feature_names' = 컬럼 이름 data의 각 열이 무엇인지 컬럼이름
+    'frame'         = pandas DataFrame 형태로 데이터 조회
+                      DESCR 설명이 아닌 표 형태로 데이터를 보고 싶을 때 사용
     target          = 정답 (y에 넣는 것)
                       0,1,2 와 같이 index 숫자로 된 정답
     target_names    = 정답 이름
