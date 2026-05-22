@@ -17,7 +17,7 @@ def 문장읽기(text):
 
     # pygame 재생
     pygame.mixer.init()                     # 변환된 소리를 재생하기 위하여 소리 도구 준비
-    pygame.mixer.music.load('hello.mp3')    # 소리낼 파일 준비
+    pygame.mixer.music.load('sourds/hello.mp3')    # 소리낼 파일 준비
     pygame.mixer.music.play()               # 소리 재생 시작
 
     # 트릭
@@ -43,7 +43,7 @@ def 텍스트파일읽기():
     tts.save('text.mp3')
 
     pygame.mixer.init()
-    pygame.mixer.music.load('text.mp3')
+    pygame.mixer.music.load('sourds/text.mp3')
     pygame.mixer.music.play()
 
     while pygame.mixer.music.get_busy():
@@ -64,7 +64,7 @@ def 입력한글자읽기():
         tts.save("input.mp3")
 
 
-        pygame.mixer.music.load('input.mp3')      # ⑥ 파일 준비
+        pygame.mixer.music.load('sourds/input.mp3')      # ⑥ 파일 준비
         pygame.mixer.music.get_busy()      # ⑦ 재생 시작
 
         while pygame.mixer.music.get_busy():
@@ -77,7 +77,7 @@ def 공통함수만들기(text):              # 함수 이름을 지어주세요
     tts.save("output.mp3")
 
     pygame.mixer.init()
-    pygame.mixer.music.load("output.mp3")
+    pygame.mixer.music.load("sourds/output.mp3")
     pygame.mixer.music.play()
 
     while pygame.mixer.music.get_busy():

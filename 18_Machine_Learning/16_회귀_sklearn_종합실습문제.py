@@ -36,11 +36,11 @@ def 광고매출예측_모델():
     plt.tight_layout()
     plt.show()
 
-    with open('ad_model.pkl', 'wb') as f:
+    with open('models/ad_model.pkl', 'wb') as f:
         pickle.dump(model, f)
     print("ad_model.pkl 저장 완료!")
 
-    with open('ad_model.pkl', 'rb') as f:
+    with open('models/ad_model.pkl', 'rb') as f:
         loaded_model = pickle.load(f)
 
     result = loaded_model.predict([[300]])
@@ -81,11 +81,11 @@ def 운동모델():
     plt.show()
 
     # TODO 7. pkl 저장
-    with open('exercise_model.pkl', 'wb') as f:
+    with open('models/exercise_model.pkl', 'wb') as f:
         pickle.dump(model, f)
 
     # TODO 8. pkl 불러오기
-    with open('exercise_model.pkl', 'rb') as f:
+    with open('models/exercise_model.pkl', 'rb') as f:
         loaded_model = pickle.load(f)
 
     # TODO 9. 내가 90분 운동하면 칼로리가 얼마나 소모될까?
