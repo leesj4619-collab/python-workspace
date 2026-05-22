@@ -130,6 +130,7 @@ def csv_기초코드문법():
     '''
     X_train_숫자로변경 = vectorizer.fit_transform(X_train) # fit_transform = 훈련용 데이터만 선택
     '''
+    ValueError: Found input variables with inconsistent numbers of samples: [1115, 4457]
     위에서 분리한 테스트 데이터의 정답은 1115개 인데, 왜 테스트용 데이터라고 가져온건 4457개니?
     제대로 테스트 데이터 정답과 테스트용 데이터 선택해서 가져온 거 맞니?
     '''
