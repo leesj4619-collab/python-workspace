@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 
-
 # 수집한 데이터 시각화하여 확인
 def 산점도확인():
     # 1. 산점도를 이용해서 꽃들이 어디 모여있는지 확인

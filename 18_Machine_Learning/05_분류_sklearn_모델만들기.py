@@ -32,3 +32,24 @@ with open(f'iris_model{acc * 100:.1f}.pkl','wb') as f:
     pickle.dump(model,f)
 
 print('모델 저장 완료')
+
+# iris = load_iris
+# X = iris.data
+# y = iris.target
+#
+# model_test_split = 0.2
+# model_state_random = 42
+#
+# X_train, X_test, y_train, y_test = train_test_split(X,y,train_test_split=model_test_split,random_state=model_state_random)
+#
+# model = KNeighborsClassifier(n_neighbors=3)
+# model.fit(X_train,y_train)
+#
+# y_pred = model.predict(X_test)
+# acc = accuracy_score(y_test, y_pred)
+#
+# with open(f"iris_model_{model_test_split}_{model_state_random}_{acc*100:.1f}.pkl",'wb')as f:
+#     pickle.dump(model,f)
+#
+# print('아이리스모델 저장 완료')
+
