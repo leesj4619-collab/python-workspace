@@ -10,7 +10,7 @@ app = Flask(__name__) # 현재 app.py에서 실행하지 않을 경우 실행하
 # 이렇게 작성하면 with open('iris_model100.0.pkl','rb') as f:
 # 같은 구문이지만 with의 경우 오픈과 동시에 사용이 다되면 자동으로 닫기 처리가 된다.
 '''
-with open('iris_model100.0.pkl','rb') as f: # 우리가 학습한 데이터를 기준으로 만들어 놓은 모델 가져와서 사용할 준비
+with open('iris_model100.0.pkl', 'rb') as f: # 우리가 학습한 데이터를 기준으로 만들어 놓은 모델 가져와서 사용할 준비
     model = pickle.load(f)
 종류 = ['setosa','versicolor','virginica'] # 모델이 예측하는 숫자(0,1,2)를 실제 꽃 이름으로 바꿔줄 리스트
 

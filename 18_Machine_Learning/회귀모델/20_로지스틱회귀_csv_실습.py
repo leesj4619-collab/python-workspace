@@ -20,7 +20,7 @@ from sklearn.preprocessing import LabelEncoder
 
 def loan_dataset():
     # 1. 데이터 불러오기
-    df = pd.read_csv('csvs/loan.csv')
+    df = pd.read_csv('../csvs/loan.csv')
 
     # 2. 데이터 크기 확인
     print('shape(행,열) : ',df.shape)
@@ -68,7 +68,7 @@ def 데이터분석(  data  ,  name  ):   # 매개변수 2개 넣기
 
 def loan_dataset():
     # 1. 데이터 호출 후 데이터 분석하기
-    df = pd.read_csv("csvs/loan.csv")
+    df = pd.read_csv("../csvs/loan.csv")
     데이터분석(df, 'Loan_Status')   # 함수 호출
 
     # 2. 전처리 작업 시작
@@ -151,7 +151,7 @@ loan_dataset()
 # 빈값의 경우 계산이 되지 않기 때문 1+2+26.5+" " => 계산 에러 발생
 
 def churn_dataset():
-    df = pd.read_csv("csvs/churn.csv")
+    df = pd.read_csv("../csvs/churn.csv")
     데이터분석(df, "Churn")  # ← target 컬럼 이름 확인
 
     # TODO 1. 필요없는 ID 컬럼 제거
@@ -193,7 +193,7 @@ def churn_dataset():
 # LabelEncoder    = 카테고리
 # TfidfVectorizer = 문장/문단 (긴 텍스트)
 def spam_dataset():
-    df = pd.read_csv("csvs/spam.csv", encoding="latin-1")
+    df = pd.read_csv("../csvs/spam.csv", encoding="latin-1")
 
     # TODO 1. 필요한 컬럼만 선택하고 이름 바꾸기
     # 힌트 : spam.csv 는 컬럼이 v1, v2, v3... 으로 되어 있다
@@ -231,7 +231,7 @@ def spam_dataset():
 # 키(cm) vs 몸무게(kg) 단위가 달라 비교 못함
 # 표준화하여 공평하게 비교
 def fraud_dataset():
-    df = pd.read_csv("csvs/fraud.csv")
+    df = pd.read_csv("../csvs/fraud.csv")
     데이터분석(df, "Class")
 
     # TODO 1. X, y 나누기

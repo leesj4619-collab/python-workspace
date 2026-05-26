@@ -55,13 +55,13 @@ def 당뇨병_모델():
     print(f'R² : {r2_score(y_test,y_pred):.4f}')
 
     # TODO 2. diabetes_model.pkl 로 저장하기
-    with open(f'models/diabetes_model.pkl', 'wb')as f:
+    with open(f'../models/diabetes_model.pkl', 'wb')as f:
         pickle.dump(model,f)
     print('diabetes_model.pkl 저장 완료!')
 
 
     # TODO 3. 저장한 pkl 불러오기
-    with open('models/diabetes_model.pkl', 'rb')as f:
+    with open('../models/diabetes_model.pkl', 'rb')as f:
         model = pickle.load(f)
 
     # TODO 4. 불러온 모델로 X_test[0] 예측해서 출력하기
@@ -86,13 +86,13 @@ def 당뇨병_모델_알파데이터다수비교():
     print(f'R² : {r2_score(y_test,y_pred):.4f}')
 
     # TODO 2. diabetes_model.pkl 로 저장하기
-    with open(f'models/diabetes_model.pkl', 'wb')as f:
+    with open(f'../models/diabetes_model.pkl', 'wb')as f:
         pickle.dump(model,f)
     print('diabetes_model.pkl 저장 완료!')
 
 
     # TODO 3. 저장한 pkl 불러오기
-    with open('models/diabetes_model.pkl', 'rb')as f:
+    with open('../models/diabetes_model.pkl', 'rb')as f:
         model = pickle.load(f)
 
     # TODO 4. 불러온 모델로 X_test[0] 예측해서 출력하기
