@@ -36,7 +36,7 @@ def 문장읽기(text):
 
 def 텍스트파일읽기():
     # 힌트: with 를 쓰면 자동으로 close() 해줘요
-    with open("read_me.txt", "r", encoding="utf-8") as f:
+    with open("../read_me.txt", "r", encoding="utf-8") as f:
         text = f.read()
 
     tts = gTTS(text=text, lang='ko')
@@ -98,7 +98,7 @@ def 문장읽기():
 
 
 def 텍스트파일읽기():
-    with open("read_me.txt", "r", encoding="utf-8")as f:
+    with open("../read_me.txt", "r", encoding="utf-8")as f:
         text = f.read()
     print(text)
     공통함수만들기(text)                # ④ 공통 함수 호출 + 인자 넣기

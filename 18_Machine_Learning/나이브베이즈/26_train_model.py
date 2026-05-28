@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score
 # ================================
 # 1. CSV 불러오기
 # ================================
-df = pd.read_csv('csvs/google_reviews.csv')          # TODO 1: 지난 과제에서 저장한 CSV 경로
+df = pd.read_csv('../csvs/google_reviews.csv')          # TODO 1: 지난 과제에서 저장한 CSV 경로
 
 print(df.head())
 print(df.shape)

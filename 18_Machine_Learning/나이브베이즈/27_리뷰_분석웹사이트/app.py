@@ -13,7 +13,7 @@ app = Flask(__name__)
 # 모델 불러오기
 # train_model.py 실행 후 생성된 파일이름으로 맞춰주세요.
 # =============================
-with open('review_model_0.1_42_ 86.3.pkl','rb')as f:
+with open('review_model_0.1_42_ 86.3.pkl', 'rb')as f:
     저장된모델 = pickle_load(f)
 model = 저장된모델['model']
 vectorizer = 저장된모델['vectorizer']

@@ -6,7 +6,7 @@ import xgboost as xgb
 import lightgbm as lgb
 
 def 데이터분석하기():
-    df = pd.read_csv('csvs/seoulBike/SeoulBikeData.csv',encoding='latin1')
+    df = pd.read_csv('../csvs/seoulBike/SeoulBikeData.csv', encoding='latin1')
 
     # =================================
     # 1. 데이터 분석하는 메서드와 속성을 이용해서
@@ -100,7 +100,7 @@ from sklearn.model_selection import train_test_split
 # ================================
 # 데이터 불러오기
 # ================================
-df = pd.read_csv('csvs/seoulBike/SeoulBikeData.csv', encoding='latin1')
+df = pd.read_csv('../csvs/seoulBike/SeoulBikeData.csv', encoding='latin1')
 
 """
 ==============================================

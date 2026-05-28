@@ -46,8 +46,8 @@ from xgboost.dask import predict
 # test.csv는 train에서 만든 모델을 가지고 test.csv에서
 #            얼마나 예측을 잘하는지 확인하기 위한 시험 문제
 # =====================
-train = pd.read_csv('csvs/titanic/train.csv')
-test = pd.read_csv('csvs/titanic/test.csv')
+train = pd.read_csv('../csvs/titanic/train.csv')
+test = pd.read_csv('../csvs/titanic/test.csv')
 
 # =====================
 # 2. 데이터 분석 pandas 이용해서 데이터 확인

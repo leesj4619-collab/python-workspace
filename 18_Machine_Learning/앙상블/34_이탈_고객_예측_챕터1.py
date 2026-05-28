@@ -15,7 +15,7 @@ def 고객이탈예측():
 
     # TODO 1: CSV 파일 읽기
     # 힌트: pd.read_csv("ecommerce_customer_data_custom_ratios.csv")
-    df = pd.read_csv('csvs/ecommerce_customer_data_custom_ratios.csv',encoding='utf-8')
+    df = pd.read_csv('../csvs/ecommerce_customer_data_custom_ratios.csv', encoding='utf-8')
 
     print("=== 데이터 미리보기 ===")
     print(df.head())
