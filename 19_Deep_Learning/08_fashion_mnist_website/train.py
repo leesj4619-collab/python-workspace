@@ -18,7 +18,7 @@ def run_fashion_mnist():
         Input(shape=(28, 28)),
         Flatten(),
         # TODO: 뉴런 256개, 활성화함수 relu 를 채우세요
-        Dense(256, activation='relu'),
+        Dense(512, activation='relu'),
         # TODO: 출력층 - 옷 종류 10개, 확률 변환 활성화함수를 채우세요
         Dense(10, activation='softmax')
     ])
