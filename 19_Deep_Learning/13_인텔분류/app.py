@@ -7,7 +7,7 @@ import io
 app = Flask(__name__)
 
 # TODO 1: 모델 파일 이름 채우기
-model = load_model('models/____________')
+model = load_model('models/intel_model.keras')
 
 # 알파벳 순서 고정 (image_dataset_from_directory 가 알파벳 순으로 읽음)
 장면목록 = ['buildings', 'forest', 'glacier', 'mountain', 'sea', 'street']
